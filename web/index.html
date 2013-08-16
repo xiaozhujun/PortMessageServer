@@ -1,0 +1,29 @@
+
+<html>
+    <head>
+        <script type="text/javascript" src='js/jquery-1.7.2.min.js'></script>
+        <script type="text/javascript" src="js/dynamicProfile.js"></script>
+        <script type="text/javascript" src="js/rgraph/libraries/RGraph.common.core.js" ></script>
+        <script type="text/javascript" src="js/rgraph/libraries/RGraph.common.effects.js" ></script>
+        <script type="text/javascript" src="js/rgraph/libraries/RGraph.line.js" ></script>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var data = RGraph.array_pad([], 60);
+                var gd = new GraphDrawer("linebf", data);
+                gd.drawGraph();
+                $("#btn").click(function(){
+                     $("#disp").load("http://localhost:8080/portcrane/sensors/sensor/zd000001.htm",function(responseTxt){
+                         var obj = eval(responseTxt);
+                         $(this).text(obj[0].values[0].value);
+                     });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <canvas id="linebf" width="800" height="400">[No canvas support]</canvas>
+        <div><button id="btn" value="haha"/></div>
+        <div id="disp">haha</div>
+    </body>
+</html>
